@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <title>DivineWeb v2.0 — Демонстрация рендерера HolyC</title>
+</head>
+<body>
+  <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='860' height='86'><rect width='860' height='86' rx='10' fill='%23102654'/><rect x='3' y='3' width='854' height='80' rx='8' fill='none' stroke='%2353d8fb' stroke-width='2'/><polygon points='46,17 68,67 24,67' fill='%23f7c948' stroke='%23ffffff' stroke-width='1.5'/><text x='90' y='38' font-family='DejaVu Sans' font-size='21' font-weight='bold' fill='%23ffffff'>DIVINEWEB v2.0 — 2D БРАУЗЕР НА ЯЗЫКЕ HOLYC</text><text x='90' y='62' font-family='DejaVu Sans' font-size='13.5' fill='%239be2ff'>Многовкладочность • Закладки • Растровая и SVG-графика • 2D-таблицы • Глобальный P2P Холинет</text></svg>" alt="DivineWeb v2.0 Banner">
+
+  <h1>Добро пожаловать в <span style="color:#0a3b96">DivineWeb v2.0</span>!</h1>
+
+  <p>
+    Перед вами полнофункциональный графический 2D-браузер, написанный с нуля на компилируемом языке
+    <b>HolyC</b> для Linux (X11 + Cairo + GdkPixbuf + OpenSSL). В версии <mark>DivineWeb v2.0</mark>
+    добавлены полноценные вкладки (<code>Ctrl+T</code>), панель избранного (<code>Ctrl+D</code>),
+    масштабирование (<code>Ctrl + / -</code>), <mark>поиск по тексту на странице</mark> (<code>Ctrl+F</code>),
+    отрисовка картинок <code>&lt;img&gt;</code> и настоящих сеточных таблиц <code>&lt;table&gt;</code>!
+  </p>
+
+  <blockquote>
+    &laquo;Идиот восхищается сложностью, а гений восхищается простотой.&raquo;
+    &mdash; <b>Терри А. Дэвис</b>, создатель <i>TempleOS</i> и языка <i>HolyC</i>.
+  </blockquote>
+
+  <h2>Сравнение подсистем браузера (2D-таблица <code>&lt;table&gt;</code>)</h2>
+  <table>
+    <tr>
+      <th>Подсистема</th>
+      <th>Модуль HolyC</th>
+      <th>Поддерживаемые стандарты и функции</th>
+      <th>Статус</th>
+    </tr>
+    <tr>
+      <td><b>Вкладки и Закладки</b></td>
+      <td><code>browser.HC</code></td>
+      <td>До 8 независимых вкладок (WWW + P2P), сохранение <code>bookmarks.conf</code></td>
+      <td><span style="color:#0d7a3e"><b>ГОТОВО v2.0</b></span></td>
+    </tr>
+    <tr>
+      <td><b>Декодер графики</b></td>
+      <td><code>image_loader.HC</code></td>
+      <td>PNG, JPEG, SVG, GIF, WebP, <code>data:image/svg+xml</code> &rarr; Cairo ARGB32</td>
+      <td><span style="color:#0d7a3e"><b>ГОТОВО v2.0</b></span></td>
+    </tr>
+    <tr>
+      <td><b>Табличная вёрстка</b></td>
+      <td><code>layout_render.HC</code></td>
+      <td>Авторасчёт колонок <code>&lt;table&gt;</code>, перенос строк, зебра, рамки</td>
+      <td><span style="color:#0d7a3e"><b>ГОТОВО v2.0</b></span></td>
+    </tr>
+    <tr>
+      <td><b>P2P Холинет</b></td>
+      <td><code>holynet_p2p.HC</code></td>
+      <td>Глобальный WAN P2P + <b>PEX</b>, поиск RU/EN, Конструктор + сохранение на диск</td>
+      <td><span style="color:#0d7a3e"><b>АКТИВЕН</b></span></td>
+    </tr>
+  </table>
+
+  <h2>Форматирование текста и интерактивные ссылки</h2>
+  <ul>
+    <li>Поддержка <mark>маркерного выделения &lt;mark&gt;</mark>, <span style="color:#b81d13"><b>произвольных HEX-цветов</b></span>, <s>зачёркнутого текста</s> и <u>подчёркивания</u>.</li>
+    <li>Живой Интернет по HTTPS/TLS: <a href="https://www.kernel.org">Ядро Linux (kernel.org)</a> | <a href="https://holyc-lang.com">Сайт компилятора HolyC</a> | <a href="https://en.wikipedia.org/wiki/TempleOS">Wikipedia: TempleOS</a>.</li>
+    <li>Суверенная P2P-сеть: <a href="holy://home">Открыть Каталог Холинета</a> | <a href="holy://monitor?sync=1">Таблица P2P-мониторинга</a>.</li>
+  </ul>
+
+  <pre>U0 DivineMessage()
+{
+  "Браузер DivineWeb v2.0 работает нативно в машинных кодах x86_64!\n";
+}</pre>
+</body>
+</html>

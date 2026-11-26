@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>ОРБИТАЛЬНЫЙ КИБЕР-КОСМОС (cosmos.org) — Живая 2D/3D Анимация</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px;
+    background: radial-gradient(circle at 20% 10%, #0d2b22 0%, #060d18 65%, #03070d 100%);
+    color: #e6f7ef;
+    font-family: "DejaVu Sans", system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    background: rgba(9, 24, 34, 0.86);
+    border: 2px solid #2be09e;
+    border-radius: 14px;
+    padding: 22px 26px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.65), 0 0 28px rgba(43, 224, 158, 0.16);
+  }
+  h1 {
+    margin: 0 0 8px 0;
+    font-size: 26px;
+    color: #ffe875;
+    letter-spacing: 0.4px;
+  }
+  .sub {
+    margin: 0 0 14px 0;
+    color: #9de8c7;
+    font-size: 14.5px;
+  }
+  .ticker-box {
+    background: #08291d;
+    border: 1.5px solid #e3b33d;
+    border-radius: 8px;
+    padding: 7px 12px;
+    margin: 12px 0 16px 0;
+    color: #fff099;
+    font-family: "DejaVu Sans Mono", monospace;
+    font-weight: bold;
+    font-size: 14px;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin: 10px auto 14px auto;
+    border-radius: 10px;
+    border: 2px solid #38e5a5;
+    background: #071120;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0 18px 0;
+  }
+  button {
+    background: #0e3d2b;
+    color: #ffe985;
+    border: 1.5px solid #44e3a4;
+    border-radius: 7px;
+    padding: 8px 14px;
+    font-family: "DejaVu Sans Mono", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.12s ease, background 0.15s ease;
+  }
+  button:hover {
+    background: #175c41;
+    transform: translateY(-1px);
+  }
+  blockquote {
+    margin: 14px 0;
+    padding: 10px 15px;
+    border-left: 4px solid #f0be3d;
+    background: rgba(255, 232, 117, 0.07);
+    color: #d8f3e5;
+    border-radius: 0 8px 8px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid #245947;
+    padding: 8px 11px;
+    text-align: left;
+  }
+  th {
+    background: #0d3b2b;
+    color: #ffe985;
+  }
+  tr:nth-child(even) td {
+    background: rgba(16, 48, 38, 0.45);
+  }
+  code {
+    background: rgba(43, 224, 158, 0.14);
+    color: #7affc6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "DejaVu Sans Mono", monospace;
+  }
+  a {
+    color: #63ffd1;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Орбитальный Кибер-Космос Holynet (cosmos.org)</h1>
+  <p class="sub">Двухрежимный анимированный сайт: работает и в обычных браузерах, и нативно в <b>DivineWeb на чистом HolyC (30 FPS Cairo 2D/3D)</b>!</p>
+
+  <div class="ticker-box">
+    <marquee>★ ПРЯМОЙ ЭФИР P2P HOLYNET ★ ОРБИТАЛЬНАЯ СТАНЦИЯ COSMOS.ORG В СЕТИ ★ ВРАЩЕНИЕ 3D-ГИПЕРКУБА HOLYC + ПЛАНЕТАРНЫЙ РОЙ БЕЗ NAT ★ НАЖМИТЕ F7 В БРАУЗЕРЕ ДЛЯ 16-ЦВЕТНОГО VGA-РЕЖИМА ТЕРРИ ДЭВИСА ★</marquee>
+  </div>
+
+  <canvas id="cosmosCanvas" width="780" height="310" data-anim="cosmos"></canvas>
+
+  <div class="controls" id="webControls"></div>
+
+  <blockquote>
+    <b>Как устроена эта анимация:</b> холст выше одновременно содержит декларативный атрибут
+    <code>&lt;canvas data-anim="cosmos"&gt;</code> (его напрямую со скоростью <b>30 кадров/с</b> рисует
+    движок <code>PaintAnimatedCanvas</code> на <b>HolyC + Cairo</b> внутри <code>holy-browser</code>) и встроенный
+    HTML5-рендерер для предпросмотра в обычных браузерах!
+  </blockquote>
+
+  <h2>Объекты живой телеметрии на сцене</h2>
+  <table>
+    <tr><th>Объект сцены</th><th>Математика движения</th><th>Статус в P2P</th></tr>
+    <tr><td><b>Ядро Холинета (Солнце)</b></td><td>Гармоническая пульсация короны <code>1 + 0.12 * sin(4.2t)</code></td><td>200 ONLINE</td></tr>
+    <tr><td><b>Планета Терра-HolyC + Луна</b></td><td>Двойная кеплерова орбита со спутником (<code>1.05 рад/с</code> и <code>4.4 рад/с</code>)</td><td>СИНХРОНИЗИРОВАНО</td></tr>
+    <tr><td><b>3D Гиперкуб TempleOS</b></td><td>Перспективная проекция 8 вершин и 12 рёбер с вращением по осям X и Y</td><td>30/60 FPS</td></tr>
+    <tr><td><b>Осциллограф роя</b></td><td>Сумма бегущих волн <code>sin(kx - wt) + cos(2kx + wt)</code></td><td>HOLY/2.0 TLS</td></tr>
+  </table>
+
+  <p style="margin-top:16px">
+    Переходы внутри P2P-сети Holynet:
+    <a href="holy://home">Каталог Холинета</a> |
+    <a href="holy://templeos.org">Киберхрам (templeos.org)</a> |
+    <a href="holy://monitor?sync=1">Мониторинг мировых пиров</a>
+  </p>
+</div>
+
+<script>
+(function() {
+  const cv = document.getElementById('cosmosCanvas');
+  if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d');
+
+  let paused = false;
+  let speed = 1.0;
+  let davisMode = false;
+  let simTime = 0;
+  let lastTs = performance.now();
+
+  const ctrlBox = document.getElementById('webControls');
+  if (ctrlBox) {
+    ctrlBox.innerHTML =
+      '<button id="btnPause" onclick="togglePause()">&#9208; Пауза / Старт</button>' +
+      '<button id="btnSpeed" onclick="toggleSpeed()">&#9889; Скорость: x1.0</button>' +
+      '<button id="btnDavis" onclick="toggleDavis()">Режим 16 цветов VGA (Дэвис): ВЫКЛ</button>';
+  }
+
+  window.togglePause = function() {
+    paused = !paused;
+    document.getElementById('btnPause').textContent = paused ? '▶ Продолжить' : '⏸ Пауза / Старт';
+  };
+  window.toggleSpeed = function() {
+    speed = (speed === 1.0) ? 2.5 : (speed === 2.5 ? 0.4 : 1.0);
+    document.getElementById('btnSpeed').textContent = '⚡ Скорость: x' + speed.toFixed(1);
+  };
+  window.toggleDavis = function() {
+    davisMode = !davisMode;
+    document.getElementById('btnDavis').textContent =
+      '🖥 Режим 16 цветов VGA (Дэвис): ' + (davisMode ? 'ВКЛ' : 'ВЫКЛ');
+  };
+
+  /* Калик мыши по холсту создаёт вспышку сверхновой! */
+  const bursts = [];
+  cv.addEventListener('click', function(e) {
+    const r = cv.getBoundingClientRect();
+    const x = (e.clientX - r.left) * (cv.width / r.width);
+    const y = (e.clientY - r.top) * (cv.height / r.height);
+    bursts.push({ x: x, y: y, age: 0 });
+  });
+
+  function draw(now) {
+    const dt = Math.min(0.05, (now - lastTs) / 1000);
+    lastTs = now;
+    if (!paused) simTime += dt * speed;
+    const t = simTime;
+    const W = cv.width, H = cv.height;
+    const scale = H / 300.0;
+
+    ctx.fillStyle = davisMode ? '#000000' : '#071120';
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = davisMode ? '#55FFFF' : '#38e5a5';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(1, 1, W - 2, H - 2);
+
+    /* 1. Мерцающие звёзды */
+    for (let i = 0; i < 46; i++) {
+      const fx = ((i * 173 + 29) % 997) / 997;
+      const fy = ((i * 311 + 71) % 887) / 887;
+      const sx = 12 + fx * (W - 24);
+      const sy = 12 + fy * (H - 56);
+      const twk = 0.45 + 0.55 * Math.sin(t * 3.2 + i * 1.7);
+      if (davisMode) {
+        ctx.fillStyle = twk > 0.65 ? '#FFFFFF' : '#AAAAAA';
+        ctx.fillRect(sx | 0, sy | 0, 2, 2);
+      } else {
+        ctx.fillStyle = 'rgba(210, 240, 255, ' + twk.toFixed(2) + ')';
+        ctx.beginPath();
+        ctx.arc(sx, sy, 1.1 + (i % 2) * 0.7, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    /* 2. Орбитальная P2P-система */
+    const sunX = W * 0.31, sunY = H * 0.44;
+    const r1 = 44 * scale, r2 = 78 * scale, r3 = 114 * scale;
+
+    ctx.strokeStyle = davisMode ? '#555555' : 'rgba(62, 125, 168, 0.45)';
+    ctx.lineWidth = 1;
+    [r1, r2, r3].forEach(function(r) {
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, r, 0, Math.PI * 2);
+      ctx.stroke();
+    });
+
+    const pulse = 1.0 + 0.12 * Math.sin(t * 4.2);
+    if (!davisMode) {
+      ctx.fillStyle = 'rgba(255, 192, 38, 0.24)';
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, 26 * scale * pulse, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.fillStyle = davisMode ? '#FFFF55' : '#ffdb38';
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 16.5 * scale * pulse, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* Планета 1 */
+    const a1 = t * 1.85;
+    ctx.fillStyle = davisMode ? '#FF5555' : '#ff7a57';
+    ctx.beginPath();
+    ctx.arc(sunX + Math.cos(a1) * r1, sunY + Math.sin(a1) * r1, 5.2 * scale, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* Планета 2 + Луна */
+    const a2 = t * 1.05 + 1.2;
+    const p2x = sunX + Math.cos(a2) * r2, p2y = sunY + Math.sin(a2) * r2;
+    ctx.fillStyle = davisMode ? '#55FF55' : '#38eb9e';
+    ctx.beginPath();
+    ctx.arc(p2x, p2y, 7.8 * scale, 0, Math.PI * 2);
+    ctx.fill();
+
+    const ma = t * 4.4;
+    ctx.fillStyle = davisMode ? '#FFFFFF' : '#ebf5ff';
+    ctx.beginPath();
+    ctx.arc(p2x + Math.cos(ma) * 15 * scale, p2y + Math.sin(ma) * 15 * scale, 2.6 * scale, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* Планета 3 (Сатурн-P2P) */
+    const a3 = t * 0.62 + 3.4;
+    const p3x = sunX + Math.cos(a3) * r3, p3y = sunY + Math.sin(a3) * r3;
+    ctx.fillStyle = davisMode ? '#55FFFF' : '#61c2ff';
+    ctx.beginPath();
+    ctx.arc(p3x, p3y, 9 * scale, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = davisMode ? '#FFFF55' : '#fad161';
+    ctx.lineWidth = 2.2;
+    ctx.beginPath();
+    ctx.moveTo(p3x - 15 * scale, p3y + 5 * scale);
+    ctx.lineTo(p3x + 15 * scale, p3y - 5 * scale);
+    ctx.stroke();
+
+    /* 3. Вращающийся 3D каркасный гиперкуб HolyC */
+    const cx3 = W * 0.76, cy3 = H * 0.43, csz = 54 * scale;
+    const ay = t * 1.15, ax = t * 0.74;
+    const cay = Math.cos(ay), say = Math.sin(ay);
+    const cax = Math.cos(ax), sax = Math.sin(ax);
+    const pts = [];
+    for (let v = 0; v < 8; v++) {
+      const vx = (v & 1) ? 1 : -1;
+      const vy = (v & 2) ? 1 : -1;
+      const vz = (v & 4) ? 1 : -1;
+      const rx1 = vx * cay - vz * say;
+      const rz1 = vx * say + vz * cay;
+      const ry2 = vy * cax - rz1 * sax;
+      const rz2 = vy * sax + rz1 * cax;
+      const persp = 3.4 / (3.4 + rz2 * 0.55);
+      pts.push([cx3 + rx1 * csz * persp, cy3 + ry2 * csz * persp]);
+    }
+
+    const edges = [
+      [0,1],[2,3],[4,5],[6,7],
+      [0,2],[1,3],[4,6],[5,7],
+      [0,4],[1,5],[2,6],[3,7]
+    ];
+    ctx.strokeStyle = davisMode ? '#55FFFF' : '#4df5e0';
+    ctx.lineWidth = 2;
+    edges.forEach(function(e) {
+      ctx.beginPath();
+      ctx.moveTo(pts[e[0]][0], pts[e[0]][1]);
+      ctx.lineTo(pts[e[1]][0], pts[e[1]][1]);
+      ctx.stroke();
+    });
+
+    ctx.fillStyle = davisMode ? '#FFFF55' : '#ffe65c';
+    pts.forEach(function(p) {
+      ctx.beginPath();
+      ctx.arc(p[0], p[1], 3.4 * scale, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Вспышки по клику мыши */
+    for (let b = bursts.length - 1; b >= 0; b--) {
+      bursts[b].age += dt;
+      const k = bursts[b].age;
+      if (k > 0.9) { bursts.splice(b, 1); continue; }
+      ctx.strokeStyle = davisMode ? '#FFFF55' : ('rgba(255, 232, 117, ' + (1 - k / 0.9).toFixed(2) + ')');
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(bursts[b].x, bursts[b].y, 8 + k * 65, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    /* 4. Бегущая гармоническая осциллограмма P2P-сигнала */
+    const waveY = H - 26 * scale;
+    ctx.strokeStyle = davisMode ? '#55FF55' : '#59ff8f';
+    ctx.lineWidth = 1.9;
+    ctx.beginPath();
+    for (let wx = 14; wx < W - 14; wx += 4) {
+      const wy = waveY + Math.sin(wx * 0.045 - t * 5.2) * (8.5 * scale)
+                       + Math.cos(wx * 0.095 + t * 3.1) * (4.0 * scale);
+      if (wx === 14) ctx.moveTo(wx, wy);
+      else ctx.lineTo(wx, wy);
+    }
+    ctx.stroke();
+
+    /* 5. Живой HUD */
+    ctx.fillStyle = davisMode ? '#FFFF55' : '#c2fae0';
+    ctx.font = 'bold ' + Math.round(12 * scale) + 'px "DejaVu Sans Mono", monospace';
+    ctx.fillText('[LIVE COSMOS :: КЛИКНИТЕ ПО ХОЛСТУ ДЛЯ ИМПУЛЬСА]  T = ' + t.toFixed(2) + ' c', 14, 21 * scale);
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
