@@ -1,0 +1,9 @@
+Tor 0.4.9.17
+Source: https://dist.torproject.org/tor-0.4.9.17.tar.gz
+Official source verification instructions and fingerprints:
+https://support.torproject.org/little-t-tor/getting-started/verifying/
+SHA-256 source: ff372c41ee7013557fe5b7acd96c909950b27a7959c59fcb87c02591682fabe2
+SHA-256 included stripped binary: 379a6a610e27412f2edcf7c60119334a06bc15449381bf2b1cb3518a97960d14
+Both signatures on the checksum verified: David Goulet primary B74417EDDF22AC9F9E90F49142E86A2A11F48D36; Alexander Faeroy signing subkey 514102454D0A87DB0767A1EBBE6A0531C18A9179 (primary 1C1BC007A9F607AA8152C040BEA7B180B1491921).
+Linux x86-64, GCC 14.2, glibc 2.41; ./configure --disable-asciidoc --disable-unittests --disable-seccomp; make -j6 src/app/tor; strip src/app/tor.
+Dynamic dependencies: glibc (>= 2.38), libevent 2.1, OpenSSL 3, zlib, liblzma, libzstd. Bundled Tor does not automatically update. See vendor/tor/LICENSE.

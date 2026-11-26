@@ -1,0 +1,25 @@
+# Local build products (the supplied holy-browser and vendor/tor/tor are kept)
+*.o
+*.a
+/tests/test_quickjs
+/tests/test_css
+/tests/test_holynet
+/tests/test_tls
+
+# User data and local publications
+/bookmarks.conf
+/holynet_node_*.key
+/holynet_node_*.lock
+/holynet_peers.conf
+/holynet_sites/
+
+# Screenshots and Python cache
+/*.png
+__pycache__/
+*.py[cod]
+
+# Editors and OS metadata
+.vscode/
+.idea/
+*~
+.DS_Store
