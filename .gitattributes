@@ -1,0 +1,13 @@
+# Keep third-party / binary artifacts out of the GitHub language bar,
+# so the project is counted as what it actually is: a HolyC browser.
+
+# Tor: vendored source archive, signatures and the local build product.
+tor-vendor/** linguist-vendored
+vendor/tor/** linguist-vendored
+/DivineWeb-Holynet-Tor.tar.gz linguist-ignore
+
+# QuickJS engine (third-party C sources, ~2.8 MB)
+quickjs/** linguist-vendored
+# ...except our own bridge code, which is part of the browser itself
+quickjs/qjs_bridge.c -linguist-vendored
+quickjs/qjs_bridge.h -linguist-vendored
